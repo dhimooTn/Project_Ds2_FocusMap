@@ -1,0 +1,184 @@
+body {
+    font-family: 'Poppins', sans-serif;
+    background-image: linear-gradient(135deg, #f5f7ff 0%, #e8eaff 100%);
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+}
+
+.container {
+    position: relative;
+    z-index: 10;
+}
+
+.login-card {
+    background: white;
+    border-radius: 20px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    padding: 2.5rem;
+    max-width: 450px;
+    width: 100%;
+    margin: 0 auto;
+}
+
+.logo {
+    font-family: 'Pacifico', cursive;
+    font-size: 2.5rem;
+    color: #6366f1;
+    margin-bottom: 1rem;
+}
+
+.title {
+    font-size: 1.75rem;
+    font-weight: 600;
+    color: #2d3748;
+    margin-bottom: 0.5rem;
+}
+
+.subtitle {
+    color: #6b7280;
+    margin-bottom: 0;
+}
+
+.form-floating {
+    position: relative;
+}
+
+.form-control {
+    height: 56px;
+    padding-left: 48px;
+    border-radius: 12px;
+    border: 1px solid #e5e7eb;
+}
+
+.form-control:focus {
+    border-color: #6366f1;
+    box-shadow: 0 0 0 0.25rem rgba(99, 102, 241, 0.25);
+}
+
+.input-icon {
+    position: absolute;
+    left: 16px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #9ca3af;
+    z-index: 10;
+}
+
+.form-control:focus ~ .input-icon {
+    color: #6366f1;
+}
+
+.password-toggle {
+    position: absolute;
+    right: 16px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #9ca3af;
+    cursor: pointer;
+    z-index: 10;
+}
+
+.forgot-password {
+    color: #6366f1;
+    text-decoration: none;
+    font-size: 0.875rem;
+}
+
+.forgot-password:hover {
+    text-decoration: underline;
+}
+
+.login-btn {
+    width: 100%;
+    padding: 12px;
+    border-radius: 8px;
+    background: linear-gradient(to right, #6366f1, #a5b4fc);
+    border: none;
+    font-weight: 500;
+    transition: all 0.3s ease;
+}
+
+.login-btn:hover {
+    opacity: 0.9;
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(99, 102, 241, 0.3);
+}
+
+.register-text {
+    color: #6b7280;
+    margin-bottom: 0;
+}
+
+.register-link {
+    color: #6366f1;
+    font-weight: 500;
+    text-decoration: none;
+}
+
+.register-link:hover {
+    text-decoration: underline;
+}
+
+.bubble {
+    position: absolute;
+    border-radius: 50%;
+    background: linear-gradient(135deg, rgba(165, 180, 252, 0.5), rgba(99, 102, 241, 0.3));
+    animation: float 8s infinite ease-in-out;
+    z-index: 1;
+}
+
+.bubble-1 {
+    width: 120px;
+    height: 120px;
+    top: 10%;
+    left: 10%;
+    animation-delay: 0s;
+}
+
+.bubble-2 {
+    width: 80px;
+    height: 80px;
+    top: 20%;
+    right: 15%;
+    animation-delay: 1s;
+}
+
+.bubble-3 {
+    width: 150px;
+    height: 150px;
+    bottom: 15%;
+    right: 10%;
+    animation-delay: 2s;
+}
+
+.bubble-4 {
+    width: 100px;
+    height: 100px;
+    bottom: 10%;
+    left: 15%;
+    animation-delay: 3s;
+}
+
+@keyframes float {
+    0%, 100% {
+        transform: translateY(0) rotate(0deg);
+    }
+    50% {
+        transform: translateY(-20px) rotate(5deg);
+    }
+}
+
+/* Custom floating label adjustment */
+.form-floating>label {
+    left: 48px;
+    transform-origin: 0 0;
+}
+
+.form-floating>.form-control:focus~label,
+.form-floating>.form-control:not(:placeholder-shown)~label {
+    transform: scale(0.85) translateY(-0.8rem) translateX(0.15rem);
+    color: #6366f1;
+}
