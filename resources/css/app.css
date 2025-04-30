@@ -1,11 +1,108 @@
-@import 'tailwindcss';
+/* Custom CSS */
+body {
+    font-family: 'Inter', sans-serif;
+    background-color: #f8f9fa;
+}
 
-@source '../../vendor/laravel/framework/src/Illuminate/Pagination/resources/views/*.blade.php';
-@source '../../storage/framework/views/*.php';
-@source '../**/*.blade.php';
-@source '../**/*.js';
+.sidebar {
+    background-color: #2C2C54;
+    width: 250px;
+    transition: all 0.3s;
+}
 
-@theme {
-    --font-sans: 'Instrument Sans', ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji',
-        'Segoe UI Symbol', 'Noto Color Emoji';
+.font-pacifico {
+    font-family: 'Pacifico', cursive;
+}
+
+.hover-bg-white-10:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+}
+
+.progress-thin {
+    height: 8px;
+}
+
+.custom-checkbox .form-check-input {
+    width: 18px;
+    height: 18px;
+    border: 2px solid #dee2e6;
+    border-radius: 4px;
+    cursor: pointer;
+    position: relative;
+}
+
+.custom-checkbox .form-check-input:checked {
+    background-color: #3498db;
+    border-color: #3498db;
+}
+
+.custom-checkbox .form-check-input:checked::after {
+    content: "";
+    position: absolute;
+    left: 5px;
+    top: 2px;
+    width: 6px;
+    height: 10px;
+    border: solid white;
+    border-width: 0 2px 2px 0;
+    transform: rotate(45deg);
+}
+
+.custom-range::-webkit-slider-thumb {
+    width: 18px;
+    height: 18px;
+    border-radius: 50%;
+    background: #3498db;
+    cursor: pointer;
+}
+
+.mindmap-node {
+    transition: all 0.3s ease;
+}
+
+.mindmap-node:hover {
+    transform: scale(1.05);
+}
+
+.main-content {
+    margin-left: 250px;
+}
+
+@media (max-width: 767.98px) {
+    .main-content {
+        margin-left: 0;
+    }
+}
+
+.mobile-sidebar {
+    transform: translateX(-100%);
+    transition: transform 0.3s;
+}
+
+.mobile-sidebar.show {
+    transform: translateX(0);
+}
+
+.bg-blue-100 {
+    background-color: #d0e3f5;
+}
+
+.bg-purple-100 {
+    background-color: #e8d5f0;
+}
+
+.bg-green-100 {
+    background-color: #d5f0e1;
+}
+
+.bg-yellow-100 {
+    background-color: #f5e8c0;
+}
+
+.text-primary {
+    color: #3498db !important;
+}
+
+.text-secondary {
+    color: #9b59b6 !important;
 }
