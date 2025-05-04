@@ -11,10 +11,11 @@ export default defineConfig({
                 'resources/js/auth/login.js',
                 'resources/css/auth/register.css',
                 'resources/js/auth/register.js',
-                'resources/css/app.css',
-                'resources/js/app.js',
             ],
             refresh: true,
         }),
     ],
+    optimizeDeps: {
+        include: ['markmap-lib', 'markmap-view', 'markmap-render'],
+    },
 });

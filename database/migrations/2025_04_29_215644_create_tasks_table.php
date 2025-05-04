@@ -6,28 +6,24 @@ use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration
 {
-    /**
-     * Run the migrations.
-     */
-    public function up(): void
+    public function up()
     {
         Schema::create('tasks', function (Blueprint $table) {
             $table->id();
             $table->foreignId('goal_id')->constrained()->onDelete('cascade');
             $table->string('title');
             $table->text('description')->nullable();
-            $table->enum('status', ['todo', 'in_progress', 'done'])->default('todo');
+            $table->enum('status', ['pending', 'in_progress', 'completed'])->default('pending');
             $table->date('due_date')->nullable();
-            $table->integer('priority')->default(0); // Optional: 0 = low, 1 = medium, 2 = high
+            $table->enum('priority', ['low', 'medium', 'high'])->default('medium');
             $table->timestamps();
+            
+            // Index pour les performances
+            $table->index(['goal_id', 'due_date', 'priority']);
         });
-        
     }
 
-    /**
-     * Reverse the migrations.
-     */
-    public function down(): void
+    public function down()
     {
         Schema::dropIfExists('tasks');
     }

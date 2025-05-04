@@ -26,6 +26,6 @@ class RegisterController extends Controller
             'password' => Hash::make($request->password),
         ]);
 
-        return redirect()->route('login')->with('success', 'Votre compte a été créé avec succès. Vous pouvez maintenant vous connecter.');
+        return redirect()->route('login.form')->with('success', 'Votre compte a été créé avec succès. Vous pouvez maintenant vous connecter.');
     }
 }

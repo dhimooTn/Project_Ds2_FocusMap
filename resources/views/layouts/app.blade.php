@@ -24,7 +24,7 @@
                     </a>
                 </li>
                 <li class="mb-2">
-                    <a href="{{ route('goals') }}"
+                    <a href="{{ route('goals.index') }}"
                         class="d-flex align-items-center p-3 rounded hover-bg-white-10 text-white text-decoration-none">
                         <div class="w-6 h-6 d-flex align-items-center justify-content-center me-3">
                             <i class="ri-flag-line"></i>
@@ -124,7 +124,7 @@
                     </a>
                 </li>
                 <li class="mb-2">
-                    <a href="{{ route('goals') }}"
+                    <a href="#"
                         class="d-flex align-items-center p-3 rounded hover-bg-white-10 text-white text-decoration-none">
                         <div class="w-6 h-6 d-flex align-items-center justify-content-center me-3">
                             <i class="ri-flag-line"></i>
