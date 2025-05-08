@@ -13,121 +13,199 @@
             </button>
         </header>
 
-        <!-- Rest of your existing content... -->
-
- <!-- Create Goal Modal -->
-<div class="modal fade" id="createGoalModal" tabindex="-1" aria-labelledby="createGoalModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-lg">
-        <div class="modal-content border-0 shadow">
-            <div class="modal-header border-0 pb-0">
-                <h5 class="modal-title h5" id="createGoalModalLabel">Créer un nouvel objectif</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <form id="goalForm" action="{{ route('goals.store') }}" method="POST">
-                @csrf
-                <div class="modal-body pt-0">
-                    <div class="row">
-                        <div class="col-md-6">
-                            <div class="mb-4">
-                                <label for="title" class="form-label small text-muted mb-1">Titre de l'objectif</label>
-                                <input type="text" class="form-control rounded" id="title" name="title" required>
-                            </div>
-                            
-                            <div class="mb-4">
-                                <label for="description" class="form-label small text-muted mb-1">Description</label>
-                                <textarea class="form-control rounded" id="description" name="description" rows="3"></textarea>
-                            </div>
-                            
-                            <div class="mb-4">
-                                <label for="visibility" class="form-label small text-muted mb-1">Visibilité</label>
-                                <select class="form-select rounded" id="visibility" name="visibility">
-                                    <option value="private">Privé</option>
-                                    <option value="public">Public</option>
-                                </select>
-                            </div>
-                        </div>
-                        
-                        <div class="col-md-6">
-                            <div class="mb-4">
-                                <label class="form-label small text-muted mb-1">Localisation</label>
-                                <div id="map" style="height: 200px; width: 100%; border-radius: 8px; margin-bottom: 10px; border: 1px solid #dee2e6;"></div>
-                                <input type="text" class="form-control rounded mb-2" id="location" name="location" placeholder="Adresse">
-                                <div class="row g-2">
-                                    <div class="col-md-6">
-                                        <input type="text" class="form-control rounded" id="lat" name="lat" placeholder="Latitude" readonly>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <input type="text" class="form-control rounded" id="lng" name="lng" placeholder="Longitude" readonly>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+        <!-- Create Goal Modal -->
+        <div class="modal fade" id="createGoalModal" tabindex="-1" aria-labelledby="createGoalModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-lg">
+                <div class="modal-content border-0 shadow">
+                    <div class="modal-header border-0 pb-0">
+                        <h5 class="modal-title h5" id="createGoalModalLabel">Créer un nouvel objectif</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
-                    
-                    <!-- Tasks Section -->
-                    <div class="mb-4">
-                        <h6 class="h6 mb-3 d-flex align-items-center">
-                            <i class="ri-list-check-2 me-2"></i>
-                            Tâches associées
-                        </h6>
-                        <div id="tasks-container">
-                            <div class="task-item mb-3 p-3 border rounded bg-white">
-                                <div class="row g-2 mb-2">
-                                    <div class="col-md-6">
-                                        <input type="text" class="form-control rounded" name="tasks[0][title]" placeholder="Titre de la tâche" required>
+                    <form id="goalForm" action="{{ route('goals.store') }}" method="POST">
+                        @csrf
+                        <div class="modal-body pt-0">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="mb-4">
+                                        <label for="title" class="form-label small text-muted mb-1">Titre de l'objectif</label>
+                                        <input type="text" class="form-control rounded" id="title" name="title" required>
                                     </div>
-                                    <div class="col-md-6">
-                                        <input type="date" class="form-control rounded" name="tasks[0][due_date]">
+                                    
+                                    <div class="mb-4">
+                                        <label for="description" class="form-label small text-muted mb-1">Description</label>
+                                        <textarea class="form-control rounded" id="description" name="description" rows="3"></textarea>
+                                    </div>
+                                    
+                                    <div class="mb-4">
+                                        <label for="visibility" class="form-label small text-muted mb-1">Visibilité</label>
+                                        <select class="form-select rounded" id="visibility" name="visibility">
+                                            <option value="private">Privé</option>
+                                            <option value="public">Public</option>
+                                        </select>
                                     </div>
                                 </div>
-                                <textarea class="form-control rounded mb-2" name="tasks[0][description]" placeholder="Description" rows="2"></textarea>
-                                <div class="row g-2 align-items-center">
-                                    <div class="col-md-4">
-                                        <select class="form-select rounded" name="tasks[0][priority]">
+                                
+                                <div class="col-md-6">
+                                    <div class="mb-4">
+                                        <label class="form-label small text-muted mb-1">Localisation</label>
+                                        <div id="map" style="height: 200px; width: 100%; border-radius: 8px; margin-bottom: 10px; border: 1px solid #dee2e6;"></div>
+                                        <input type="text" class="form-control rounded mb-2" id="location" name="location" placeholder="Adresse">
+                                        <div class="row g-2">
+                                            <div class="col-md-6">
+                                                <input type="text" class="form-control rounded" id="lat" name="lat" placeholder="Latitude" readonly>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <input type="text" class="form-control rounded" id="lng" name="lng" placeholder="Longitude" readonly>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <!-- Tasks Section -->
+                            <div class="mb-4">
+                                <h6 class="h6 mb-3 d-flex align-items-center">
+                                    <i class="ri-list-check-2 me-2"></i>
+                                    Tâches associées
+                                </h6>
+                                <div id="tasks-container">
+                                    <div class="task-item mb-3 p-3 border rounded bg-white">
+                                        <div class="row g-2 mb-2">
+                                            <div class="col-md-6">
+                                                <input type="text" class="form-control rounded" name="tasks[0][title]" placeholder="Titre de la tâche" required>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <input type="date" class="form-control rounded" name="tasks[0][due_date]">
+                                            </div>
+                                        </div>
+                                        <textarea class="form-control rounded mb-2" name="tasks[0][description]" placeholder="Description" rows="2"></textarea>
+                                        <div class="row g-2 align-items-center">
+                                            <div class="col-md-4">
+                                                <select class="form-select rounded" name="tasks[0][priority]">
+                                                    <option value="low">Faible priorité</option>
+                                                    <option value="medium" selected>Priorité moyenne</option>
+                                                    <option value="high">Haute priorité</option>
+                                                </select>
+                                            </div>
+                                            <div class="col-md-4">
+                                                <div class="form-check">
+                                                    <input class="form-check-input custom-checkbox" type="checkbox" name="tasks[0][has_event]" id="task0HasEvent">
+                                                    <label class="form-check-label small" for="task0HasEvent">Ajouter un événement</label>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-4">
+                                                <button type="button" class="btn btn-sm btn-outline-danger rounded-pill remove-task float-end">
+                                                    <i class="ri-delete-bin-line me-1"></i> Supprimer
+                                                </button>
+                                            </div>
+                                        </div>
+                                        
+                                        <!-- Event Fields (hidden by default) -->
+                                        <div class="event-fields mt-2" style="display: none;">
+                                            <div class="row g-2">
+                                                <div class="col-md-6">
+                                                    <input type="datetime-local" class="form-control rounded" name="tasks[0][event_start]">
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <input type="datetime-local" class="form-control rounded" name="tasks[0][event_end]">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <button type="button" id="add-task" class="btn btn-sm btn-outline-secondary rounded-pill">
+                                    <i class="ri-add-line me-1"></i> Ajouter une tâche
+                                </button>
+                            </div>
+                        </div>
+                        <div class="modal-footer border-0 pt-0">
+                            <button type="button" class="btn btn-outline-secondary rounded-pill" data-bs-dismiss="modal">Annuler</button>
+                            <button type="submit" class="btn btn-primary rounded-pill">Créer l'objectif</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <!-- Create Task Modal -->
+        <div class="modal fade" id="createTaskModal" tabindex="-1" aria-labelledby="createTaskModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-lg">
+                <div class="modal-content border-0 shadow">
+                    <div class="modal-header border-0 pb-0">
+                        <h5 class="modal-title h5" id="createTaskModalLabel">Créer une nouvelle tâche</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <form action="{{ route('tasks.store.standalone') }}" method="POST">
+                        @csrf
+                        <div class="modal-body pt-0">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="mb-4">
+                                        <label for="task_title" class="form-label small text-muted mb-1">Titre de la tâche</label>
+                                        <input type="text" class="form-control rounded" id="task_title" name="title" required>
+                                    </div>
+                                    
+                                    <div class="mb-4">
+                                        <label for="task_description" class="form-label small text-muted mb-1">Description</label>
+                                        <textarea class="form-control rounded" id="task_description" name="description" rows="3"></textarea>
+                                    </div>
+                                    
+                                    <div class="mb-4">
+                                        <label for="due_date" class="form-label small text-muted mb-1">Date d'échéance</label>
+                                        <input type="date" class="form-control rounded" id="due_date" name="due_date">
+                                    </div>
+                                </div>
+                                
+                                <div class="col-md-6">
+                                    <div class="mb-4">
+                                        <label for="priority" class="form-label small text-muted mb-1">Priorité</label>
+                                        <select class="form-select rounded" id="priority" name="priority">
                                             <option value="low">Faible priorité</option>
                                             <option value="medium" selected>Priorité moyenne</option>
                                             <option value="high">Haute priorité</option>
                                         </select>
                                     </div>
-                                    <div class="col-md-4">
+                                    
+                                    <div class="mb-4">
+                                        <label for="goal_id" class="form-label small text-muted mb-1">Objectif associé (optionnel)</label>
+                                        <select class="form-select rounded" id="goal_id" name="goal_id">
+                                            <option value="">Aucun objectif</option>
+                                            @foreach($activeGoals as $goal)
+                                                <option value="{{ $goal->id }}">{{ $goal->title }}</option>
+                                            @endforeach
+                                        </select>
+                                    </div>
+                                    
+                                    <div class="mb-4">
                                         <div class="form-check">
-                                            <input class="form-check-input custom-checkbox" type="checkbox" name="tasks[0][has_event]" id="task0HasEvent">
-                                            <label class="form-check-label small" for="task0HasEvent">Ajouter un événement</label>
+                                            <input class="form-check-input custom-checkbox" type="checkbox" name="has_event" id="hasEvent">
+                                            <label class="form-check-label small" for="hasEvent">Ajouter un événement</label>
                                         </div>
-                                    </div>
-                                    <div class="col-md-4">
-                                        <button type="button" class="btn btn-sm btn-outline-danger rounded-pill remove-task float-end">
-                                            <i class="ri-delete-bin-line me-1"></i> Supprimer
-                                        </button>
-                                    </div>
-                                </div>
-                                
-                                <!-- Event Fields (hidden by default) -->
-                                <div class="event-fields mt-2" style="display: none;">
-                                    <div class="row g-2">
-                                        <div class="col-md-6">
-                                            <input type="datetime-local" class="form-control rounded" name="tasks[0][event_start]">
-                                        </div>
-                                        <div class="col-md-6">
-                                            <input type="datetime-local" class="form-control rounded" name="tasks[0][event_end]">
+                                        <div class="event-fields mt-2" style="display: none;">
+                                            <div class="row g-2">
+                                                <div class="col-md-6">
+                                                    <label for="event_start" class="form-label small text-muted mb-1">Début</label>
+                                                    <input type="datetime-local" class="form-control rounded" id="event_start" name="event_start">
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <label for="event_end" class="form-label small text-muted mb-1">Fin</label>
+                                                    <input type="datetime-local" class="form-control rounded" id="event_end" name="event_end">
+                                                </div>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                        <button type="button" id="add-task" class="btn btn-sm btn-outline-secondary rounded-pill">
-                            <i class="ri-add-line me-1"></i> Ajouter une tâche
-                        </button>
-                    </div>
+                        <div class="modal-footer border-0 pt-0">
+                            <button type="button" class="btn btn-outline-secondary rounded-pill" data-bs-dismiss="modal">Annuler</button>
+                            <button type="submit" class="btn btn-primary rounded-pill">Créer la tâche</button>
+                        </div>
+                    </form>
                 </div>
-                <div class="modal-footer border-0 pt-0">
-                    <button type="button" class="btn btn-outline-secondary rounded-pill" data-bs-dismiss="modal">Annuler</button>
-                    <button type="submit" class="btn btn-primary rounded-pill">Créer l'objectif</button>
-                </div>
-            </form>
+            </div>
         </div>
-    </div>
-</div>
+
         <div class="pt-4">
             <!-- Welcome Section -->
             <div class="mb-5">
@@ -152,7 +230,6 @@
                             <div class="d-flex align-items-center small">
                                 <span class="text-success d-flex align-items-center me-2">
                                     <i class="ri-arrow-up-line me-1"></i>
-                                    <!-- You would need to calculate this difference in the controller -->
                                     +2
                                 </span>
                                 <span class="text-muted">depuis le mois dernier</span>
@@ -174,7 +251,6 @@
                             <div class="d-flex align-items-center small">
                                 <span class="text-success d-flex align-items-center me-2">
                                     <i class="ri-arrow-up-line me-1"></i>
-                                    <!-- You would need to calculate this difference in the controller -->
                                     +5
                                 </span>
                                 <span class="text-muted">depuis le mois dernier</span>
@@ -196,7 +272,6 @@
                             <div class="d-flex align-items-center small">
                                 <span class="text-success d-flex align-items-center me-2">
                                     <i class="ri-arrow-up-line me-1"></i>
-                                    <!-- You would need to calculate this difference in the controller -->
                                     +3
                                 </span>
                                 <span class="text-muted">depuis le mois dernier</span>
@@ -218,7 +293,6 @@
                             <div class="d-flex align-items-center small">
                                 <span class="text-success d-flex align-items-center me-2">
                                     <i class="ri-arrow-up-line me-1"></i>
-                                    <!-- You would need to calculate this difference in the controller -->
                                     +12%
                                 </span>
                                 <span class="text-muted">depuis le mois dernier</span>
@@ -299,8 +373,7 @@
                                 </div>
                             @endforeach
 
-                            <button
-                                class="mt-4 text-primary font-medium d-flex align-items-center text-sm border-0 bg-transparent p-0">
+                            <button class="mt-4 text-primary font-medium d-flex align-items-center text-sm border-0 bg-transparent p-0" data-bs-toggle="modal" data-bs-target="#createTaskModal">
                                 <span>Ajouter une tâche</span>
                                 <div class="w-4 h-4 d-flex align-items-center justify-content-center ms-1">
                                     <i class="ri-add-line"></i>
@@ -313,4 +386,13 @@
         </div>
     </div>
 
+    @section('scripts')
+        <script>
+            // Toggle event fields visibility in Create Task Modal
+            document.getElementById('hasEvent').addEventListener('change', function () {
+                const eventFields = this.closest('.mb-4').querySelector('.event-fields');
+                eventFields.style.display = this.checked ? 'block' : 'none';
+            });
+        </script>
+    @endsection
 @endsection

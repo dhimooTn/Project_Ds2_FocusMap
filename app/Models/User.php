@@ -45,4 +45,20 @@ class User extends Authenticatable
             'password' => 'hashed',
         ];
     }
+
+    // Add these relationships
+    public function journals()
+    {
+        return $this->hasMany(Journal::class);
+    }
+
+    public function goals()
+    {
+        return $this->hasMany(Goal::class);
+    }
+
+    public function badges()
+    {
+        return $this->belongsToMany(Badge::class)->withTimestamps()->withPivot('awarded_at');
+    }
 }

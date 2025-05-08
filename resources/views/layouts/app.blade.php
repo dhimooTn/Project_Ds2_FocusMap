@@ -3,6 +3,53 @@
 
 <head>
     @include('layouts.head')
+    <!-- Dialogflow Messenger CSS for Chatbot -->
+    <style>
+        /* Hide chatbot by default */
+        df-messenger {
+            display: none;
+            --df-messenger-bot-message: #007bff;
+            --df-messenger-user-message: #28a745;
+            --df-messenger-titlebar-background: #343a40;
+            --df-messenger-titlebar-color: #ffffff;
+            z-index: 1000;
+        }
+
+        /* Show chatbot when active */
+        df-messenger.active {
+            display: block;
+        }
+
+        /* Floating chat icon */
+        .chat-icon {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background-color: #007bff;
+            color: white;
+            border-radius: 50%;
+            width: 60px;
+            height: 60px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            z-index: 1001;
+            transition: background-color 0.3s;
+        }
+
+        .chat-icon:hover {
+            background-color: #0056b3;
+        }
+
+        /* Adjust chatbot position for mobile */
+        @media (max-width: 767px) {
+            df-messenger {
+                --df-messenger-chat-height: 80vh;
+            }
+        }
+    </style>
 </head>
 
 <body class="min-vh-100">
@@ -60,7 +107,7 @@
                     </a>
                 </li>
                 <li class="mb-2">
-                    <a href="{{ route('blog') }}"
+                    <a href="{{ route('blog.index') }}"
                         class="d-flex align-items-center p-3 rounded hover-bg-white-10 text-white text-decoration-none">
                         <div class="w-6 h-6 d-flex align-items-center justify-content-center me-3">
                             <i class="ri-article-line"></i>
@@ -124,7 +171,7 @@
                     </a>
                 </li>
                 <li class="mb-2">
-                    <a href="#"
+                    <a href="{{ route('goals.index') }}"
                         class="d-flex align-items-center p-3 rounded hover-bg-white-10 text-white text-decoration-none">
                         <div class="w-6 h-6 d-flex align-items-center justify-content-center me-3">
                             <i class="ri-flag-line"></i>
@@ -152,7 +199,7 @@
                 </li>
                 <li class="mb-2">
                     <a href="{{ route('calendar') }}"
-                        class="d-flex align-items-center p-3 rounded hover-bg-white-10 text-white text-decoration-none">
+                        class="d-flex align-items-center p-3 roundedochemically-bg-white-10 text-white text-decoration-none">
                         <div class="w-6 h-6 d-flex align-items-center justify-content-center me-3">
                             <i class="ri-calendar-line"></i>
                         </div>
@@ -160,7 +207,7 @@
                     </a>
                 </li>
                 <li class="mb-2">
-                    <a href="{{ route('blog') }}"
+                    <a href="{{ route('blog.index') }}"
                         class="d-flex align-items-center p-3 rounded hover-bg-white-10 text-white text-decoration-none">
                         <div class="w-6 h-6 d-flex align-items-center justify-content-center me-3">
                             <i class="ri-article-line"></i>
@@ -189,12 +236,29 @@
         @yield('content')
     </main>
 
+    <!-- Floating Chat Icon -->
+    <div class="chat-icon" id="chat-icon">
+        <i class="ri-chat-3-line ri-2x"></i>
+    </div>
+
+    <!-- Dialogflow Messenger Chatbot -->
+    <script src="https://www.gstatic.com/dialogflow-console/fast/messenger/bootstrap.js?v=1"></script>
+    <df-messenger
+        intent="WELCOME"
+        chat-title="FocusMap Assistant"
+        agent-id="your-agent-id"
+        language-code="fr"
+    ></df-messenger>
+
     @include('layouts.scripts')
 
     <script>
         const mobileSidebar = document.getElementById('mobile-sidebar');
         const overlay = document.getElementById('mobile-overlay');
+        const chatIcon = document.getElementById('chat-icon');
+        const dfMessenger = document.querySelector('df-messenger');
 
+        // Mobile sidebar toggle
         document.getElementById('mobile-menu-button').addEventListener('click', () => {
             mobileSidebar.classList.remove('d-none');
             overlay.classList.remove('d-none');
@@ -208,6 +272,11 @@
         overlay.addEventListener('click', () => {
             mobileSidebar.classList.add('d-none');
             overlay.classList.add('d-none');
+        });
+
+        // Chatbot toggle
+        chatIcon.addEventListener('click', () => {
+            dfMessenger.classList.toggle('active');
         });
     </script>
 </body>
